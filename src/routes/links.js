@@ -32,9 +32,9 @@ route.post("/", async (req, res) => {
  * RESPONSE
  *      link
  */
-route.get("/:code", (req, res) => {
+route.get("/:code", async (req, res) => {
     const code = req.params.code
-    const url = findLongUrl(code)
+    const url = await findLongUrl(code)
 
     if (url) {
         return res.json(url)

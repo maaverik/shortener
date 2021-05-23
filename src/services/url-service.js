@@ -2,7 +2,7 @@ const { URLs } = require('../models/db')
 const { int2radix64, radix642int } = require('../services/radix64-service')
 
 const createRandomShortCode = async (link) => {
-    const genCode = parseInt(Math.random() * 9999999999999)   // 13 digits to represent 7 digit base 64 code
+    const genCode = parseInt(Math.random() * 999999999999)   // max 12 digit number to represent 7 digit base 64 code
     const exists = await URLs.findOne({
         where: {
             id: genCode
