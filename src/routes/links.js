@@ -2,8 +2,24 @@ const { Router } = require('express')
 
 const route = Router();
 
-route.get("/", (req, res) => {
-    res.send("Here");
-});
+/**
+ * POST /api/links
+ * BODY
+ *      link: http://asdfdfd/sdfsdf
+ *      --- optional ---
+ *      code: zxcxc
+ */
+route.post("/", (req, ers) => {
+
+})
+
+/**
+ * GET /api/links/asdasd
+ * RESPONSE
+ *      link
+ */
+route.get("/:code", (req, ers) => {
+
+})
 
 module.exports = route
