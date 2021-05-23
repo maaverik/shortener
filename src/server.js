@@ -4,8 +4,10 @@ const linksRoute = require('./routes/links')
 
 const app = express();
 
+app.use(express.json())
 app.use('/api/links/', linksRoute)
 
+// db.sync({ force: true})	// drops dbs and creates
 db.sync()
 	.then(() => console.log("DB works"))
 	.catch((err) => console.error(err));

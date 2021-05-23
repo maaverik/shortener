@@ -10,7 +10,7 @@ const db = new Sequelize({
 const URLs = db.define("urls", {
     id: {
         primaryKey: true,   // unique by default
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
     },
     code: {
         type: DataTypes.STRING(7),

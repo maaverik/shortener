@@ -21,6 +21,7 @@ const createRandomShortCode = async (link) => {
 }
 
 const createCustomShortCode = async (code, link) => {
+    // TODO: validation
     const id = radix642int(code)
     const exists = await URLs.findOne({
         where: {

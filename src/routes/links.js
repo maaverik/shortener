@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const { createCustomShortCode, createRandomShortCode, findLongUrl } = require('../services/url-service')
 
 const route = Router();
 
@@ -9,8 +10,21 @@ const route = Router();
  *      --- optional ---
  *      code: zxcxc
  */
-route.post("/", (req, ers) => {
+route.post("/", async (req, res) => {
+    const link = req.body.link  // must exist
+    const code = req.body.code
 
+    if (!code) {
+        const url = await createRandomShortCode(link)
+        return res.json(url)
+    }
+
+    try {
+        const url = await createCustomShortCode(code, link)
+        return res.json(url)
+    } catch (e) {
+        return res.status(400).json({ error: e.message })
+    }
 })
 
 /**
@@ -18,8 +32,15 @@ route.post("/", (req, ers) => {
  * RESPONSE
  *      link
  */
-route.get("/:code", (req, ers) => {
+route.get("/:code", (req, res) => {
+    const code = req.params.code
+    const url = findLongUrl(code)
 
+    if (url) {
+        return res.json(url)
+    } else {
+        return res.status(404).json({ error: "No such code present" })
+    }
 })
 
 module.exports = route
