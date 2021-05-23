@@ -25,4 +25,5 @@ const URLs = db.define("urls", {
 
 module.exports = {
     db,
+    URLs
 };
