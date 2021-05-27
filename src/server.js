@@ -14,6 +14,6 @@ db.sync()
 	.then(() => console.log("DB works"))
 	.catch((err) => console.error(err));
 
-app.listen(4445, () => {
-	console.log("Server started on localhost:4445");
+app.listen(4321, () => {
+	console.log("Server started on localhost:4321");
 });

@@ -4,9 +4,9 @@ const { findLongUrl } = require('../services/url-service')
 const route = Router();
 
 /**
- * GET /api/links/asdasd
+ * GET /api/links/shorter1
  * RESPONSE
- *      link
+ *      redirect to https://long/long/url
  */
 route.get("/:code", async (req, res) => {
     const code = req.params.code

@@ -6,9 +6,9 @@ const route = Router();
 /**
  * POST /api/links
  * BODY
- *      link: http://asdfdfd/sdfsdf
+ *      link: https://long/long/url
  *      --- optional ---
- *      code: zxcxc
+ *      code: shorter1
  */
 route.post("/", async (req, res) => {
     const link = req.body.link  // must exist
@@ -28,9 +28,9 @@ route.post("/", async (req, res) => {
 })
 
 /**
- * GET /api/links/asdasd
+ * GET /api/links/shorter1
  * RESPONSE
- *      link
+ *      https://long/long/url
  */
 route.get("/:code", async (req, res) => {
     const code = req.params.code

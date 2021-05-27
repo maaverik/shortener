@@ -1,11 +1,13 @@
 const { URLs } = require('../models/db')
-const { int2radix64, radix642int } = require('../services/radix64-service')
+const { intToRadix64, radix64ToInt } = require('../services/radix64-service')
 
 const createRandomShortCode = async (link) => {
-    const genCode = parseInt(Math.random() * 999999999999)   // max 12 digit number to represent 7 digit base 64 code
+    // radix64ToInt('_______') = 4398046511103
+    // 4398046511103 is the max possible integer that represents our 7 digit base 64 code
+    const randomCode = parseInt(Math.random() * 4398046511103)
     const exists = await URLs.findOne({
         where: {
-            id: genCode
+            id: randomCode
         }
     })
 
@@ -14,15 +16,15 @@ const createRandomShortCode = async (link) => {
     }
 
     return await URLs.create({
-        id: genCode,
-        code: int2radix64(genCode),
+        id: randomCode,
+        code: intToRadix64(randomCode),
         link: link
     })
 }
 
 const createCustomShortCode = async (code, link) => {
     // TODO: validation
-    const id = radix642int(code)
+    const id = radix64ToInt(code)
     const exists = await URLs.findOne({
         where: {
             id: id
@@ -41,7 +43,8 @@ const createCustomShortCode = async (code, link) => {
 }
 
 const findLongUrl = async (code) => {
-    const id = radix642int(code)
+    // validate code == 7 chars long
+    const id = radix64ToInt(code)
     return await URLs.findOne({
         where: {
             id: id
